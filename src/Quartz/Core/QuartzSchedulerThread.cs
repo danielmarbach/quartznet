@@ -134,6 +134,15 @@ namespace Quartz.Core
         {
             lock (sigLock)
             {
+                if (pause)
+                {
+                    pauseEvent.Reset();
+                }
+                else
+                {
+                    pauseEvent.Set();
+                }
+
                 if (Paused)
                 {
                     SignalSchedulingChange(SchedulerConstants.SchedulingSignalDateTime);
